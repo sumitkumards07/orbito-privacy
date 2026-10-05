@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account & Data Deletion Request | Orbito</title>
+  
+  <meta name="description" content="Official Account & Data Deletion request page for Orbito mobile application by Sumit Kumar / Wallcraft. Google Play Data Safety compliance.">
+  <meta name="author" content="Sumit Kumar / Wallcraft">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Glow -->
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="7"></circle>
+            <path d="M2.05 13a10.98 10.98 0 0 1 19.9 0"></path>
+            <path d="M2 11c1.5-4 5.5-7 10-7s8.5 3 10 7"></path>
+          </svg>
+        </div>
+        <span class="brand-name">Orbito</span>
+        <span class="brand-badge">Account & Data Deletion</span>
+      </a>
+
+      <div class="header-actions">
+        <a href="index.html" class="header-nav-link">Privacy Policy</a>
+        <button id="themeToggleBtn" class="icon-button" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+          <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <!-- Hero Header -->
+    <header class="hero" style="margin-bottom: 2rem;">
+      <div class="hero-tag">
+        <span class="hero-tag-pulse" style="background-color: var(--danger);" aria-hidden="true"></span>
+        <span>Google Play Policy Mandatory Web Resource</span>
+      </div>
+      <h1 class="hero-title">Request Account & Data Deletion</h1>
+      <p class="policy-body" style="text-align: center; max-width: 680px; margin: 0 auto;">
+        In compliance with Google Play requirements and privacy standards, users who have created an Orbito cloud account can request deletion of their account and associated data directly through this page or inside the mobile app.
+      </p>
+    </header>
+
+    <!-- Content Sections -->
+    <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem;">
+
+      <!-- Section: How to Delete In-App -->
+      <section class="policy-section">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-number">01</span>
+            <h2 class="section-title">Delete Directly Inside the App</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <p>If you currently have the Orbito app installed on your device, the fastest way to delete your account is inside the app:</p>
+          <ol>
+            <li>Open <strong>Orbito</strong> on your mobile device.</li>
+            <li>Tap on <strong>Settings</strong> (gear icon).</li>
+            <li>Select <strong>Account</strong>.</li>
+            <li>Tap <strong>Delete Account</strong> and confirm your request.</li>
+          </ol>
+          <p>This immediately terminates your account and initiates the removal of your cloud sync records from our Supabase database.</p>
+        </div>
+      </section>
+
+      <!-- Section: Web Deletion Request Form -->
+      <section class="policy-section">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Web Request Form (Without Installing App)</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <p>
+            If you no longer have access to the Orbito app or have uninstalled it, use the form below to generate a verified deletion request to our Privacy Desk.
+          </p>
+
+          <form id="deletionForm" onsubmit="handleDeletionSubmit(event)" style="margin-top: 1.5rem;">
+            <div class="form-group">
+              <label class="form-label" for="accountEmail">Account Email Address *</label>
+              <input type="email" id="accountEmail" class="form-input" placeholder="e.g. yourname@example.com" required>
+              <div class="form-helper">The exact email address linked to your Orbito account (Google, Apple, or Email sign-in).</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="deletionScope">Scope of Deletion *</label>
+              <select id="deletionScope" class="form-select">
+                <option value="all">Delete Entire Account and All Associated Cloud Data (Recommended)</option>
+                <option value="cloud_only">Delete Synchronized Cloud Data (Keep Local Device Data Only)</option>
+                <option value="inquiry">Request Summary of Stored Data Before Deleting</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="deletionReason">Reason for Deletion (Optional)</label>
+              <textarea id="deletionReason" class="form-textarea" rows="3" placeholder="Tell us why you're leaving or how we can improve Orbito..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-checkbox-label">
+                <input type="checkbox" id="confirmCheckbox" required>
+                <span>I understand that this action will permanently delete my habits, tasks, streaks, focus history, and account profile from Orbito servers. This cannot be undone.</span>
+              </label>
+            </div>
+
+            <div class="action-btn-group">
+              <button type="submit" class="btn btn-danger">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                Submit Deletion Request
+              </button>
+              <a href="mailto:sumitkumards07@gmail.com?subject=Orbito%20Account%20Deletion%20Request" class="btn btn-secondary">
+                Send Direct Email Instead
+              </a>
+            </div>
+          </form>
+
+          <div id="deletionResult" style="display:none; margin-top: 1.5rem;" class="callout-box success">
+            <div class="callout-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="callout-content">
+              <strong>Deletion Request Initiated</strong>
+              <p id="deletionResultText">A verification link or email prompt has been prepared. Please check your default email client to send the pre-filled verification dispatch.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Data Deletion & Retention Breakdown -->
+      <section class="policy-section">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-number">03</span>
+            <h2 class="section-title">What Data Is Deleted vs Retained</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <div class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Data Type</th>
+                  <th>Action Upon Request</th>
+                  <th>Timeline</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Account Profile & Email</strong></td>
+                  <td>Permanently purged from authentication systems</td>
+                  <td>Within 48 hours of verification</td>
+                </tr>
+                <tr>
+                  <td><strong>Habits, Streaks & Histories</strong></td>
+                  <td>Permanently deleted from Supabase cloud database</td>
+                  <td>Immediate upon account deletion</td>
+                </tr>
+                <tr>
+                  <td><strong>Tasks, Projects & Notes</strong></td>
+                  <td>Permanently deleted from Supabase cloud database</td>
+                  <td>Immediate upon account deletion</td>
+                </tr>
+                <tr>
+                  <td><strong>Focus Timer Sessions</strong></td>
+                  <td>Permanently deleted from Supabase cloud database</td>
+                  <td>Immediate upon account deletion</td>
+                </tr>
+                <tr>
+                  <td><strong>Local App Data on Device</strong></td>
+                  <td>Stays on physical device until you clear app storage or uninstall</td>
+                  <td>Managed by user via device settings</td>
+                </tr>
+                <tr>
+                  <td><strong>Automated Backup Archives</strong></td>
+                  <td>Encrypted disaster backups expire on rolling 30-day schedule</td>
+                  <td>Purged within 30 days maximum</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Developer Contact -->
+      <section class="policy-section">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-number">04</span>
+            <h2 class="section-title">Privacy Officer Contact</h2>
+          </div>
+        </div>
+        <div class="policy-body">
+          <p>For urgent questions or assistance with account deletion:</p>
+          <div class="contact-card-grid">
+            <div class="contact-card">
+              <span class="contact-card-label">Developer</span>
+              <span class="contact-card-val">Sumit Kumar / Wallcraft</span>
+            </div>
+            <div class="contact-card">
+              <span class="contact-card-label">Primary Privacy Email</span>
+              <span class="contact-card-val"><a href="mailto:sumitkumards07@gmail.com">sumitkumards07@gmail.com</a></span>
+            </div>
+            <div class="contact-card">
+              <span class="contact-card-label">Support Email</span>
+              <span class="contact-card-val"><a href="mailto:sumitds700@gmail.com">sumitds700@gmail.com</a></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand-name">Orbito</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+          Developed by Sumit Kumar / Wallcraft • Offline-First Habit & Task Tracker
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Privacy Policy</a>
+        <a href="account-deletion.html">Account Deletion</a>
+        <a href="mailto:sumitkumards07@gmail.com">Contact Developer</a>
+      </div>
+
+      <div class="footer-copy">
+        <span>&copy; 2026 Orbito. All rights reserved.</span>
+        <span>Google Play Account Deletion Web Compliance</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
